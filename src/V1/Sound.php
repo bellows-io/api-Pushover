@@ -102,7 +102,7 @@ abstract class Sound {
 	/**
 	 * Pushover Echo (long)
 	 */
-	const ECHO = "echo";
+	const EKKO = "echo";
 
 	/**
 	 * Up Down (long)
