@@ -1,0 +1,11 @@
+{
+	"name"        : "BitMoth/Pushover",
+	"description" : "A simple library for Pushover access",
+	"license"     : "MIT",
+	"require"     : {},
+	"autoload"    : {
+		"psr-4": {
+			"Pushover\\": "src/"
+		}
+	}
+}
