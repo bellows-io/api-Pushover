@@ -26,7 +26,9 @@ abstract class Priority {
 
 	/**
 	 * Behave as high priority, but also require user confirmation
+	 *
+	 * Not currently supported
 	 */
-	const CONFIRM = 2;
+	//const EMERGENCY = 2;
 
 }
