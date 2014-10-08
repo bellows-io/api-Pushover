@@ -8,13 +8,14 @@ class Client extends AbstractClient {
 
 	const API_ENDPOINT = 'https://api.pushover.net/1/messages.json';
 
-	public function __construct($appToken, $userKey, $endpointUrl = self::API_ENDPOINT) {
-		parent::__construct($appToken, $userKey, $endpointUrl);
+	public function __construct($appToken, $endpointUrl = self::API_ENDPOINT) {
+		parent::__construct($appToken, $endpointUrl);
 	}
 
 	/**
 	 * Sends a notification event to Pushover.
 	 *
+	 * @param  string $userKey   The unique ID of the user to send to
 	 * @param  string $message   The message to be sent
 	 * @param  string $title     The title of the message
 	 * @param  string $url       A URL to link the message to
@@ -25,9 +26,10 @@ class Client extends AbstractClient {
 	 * @param  string $device    your user's device name to send the message directly to that device, rather than all of the user's devices
 	 * @return boolean           Whether or not the notification was successful
 	 */
-	public function notify($message, $title = null, $url = null, $urlTitle = null, $priority = null, $timestamp = null, $sound = null, $device = null) {
+	public function notify($userKey, $message, $title = null, $url = null, $urlTitle = null, $priority = null, $timestamp = null, $sound = null, $device = null) {
 
 		$data = array(
+			'user'      => $userKey,
 			'message'   => $message,
 			'title'     => $title,
 			'device'    => $device,
@@ -41,7 +43,6 @@ class Client extends AbstractClient {
 		$data = array_filter($data);
 
 		$data['token'] = $this->appToken;
-		$data['user']  = $this->userKey;
 
 		$options = array(
 			'http' => array(

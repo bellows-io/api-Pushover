@@ -5,16 +5,14 @@ namespace Pushover;
 abstract class AbstractClient {
 
 	protected $appToken;
-	protected $userKey;
 	protected $endpointUrl;
 
-	public function __construct($appToken, $userKey, $endpointUrl) {
+	public function __construct($appToken, $endpointUrl) {
 		$this->appToken      = $appToken;
-		$this->userKey     = $userKey;
 		$this->endpointUrl = $endpointUrl;
 	}
 
-	public abstract function notify($message);
+	public abstract function notify($userKey, $message);
 
 
 
