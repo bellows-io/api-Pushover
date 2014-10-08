@@ -1,5 +1,7 @@
 <?php
 
+namespace Pushover;
+
 abstract class AbstractClient {
 
 	protected $appToken;
@@ -12,7 +14,7 @@ abstract class AbstractClient {
 		$this->endpointUrl = $endpointUrl;
 	}
 
-	public function notify($message);
+	public abstract function notify($message);
 
 
 
