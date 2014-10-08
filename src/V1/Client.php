@@ -12,18 +12,6 @@ class Client extends AbstractClient {
 		parent::__construct($appToken, $userKey, $endpointUrl);
 	}
 
-
-	/*
-	Some optional parameters may be included:
-		device - your user's device name to send the message directly to that device, rather than all of the user's devices
-	title - your message's title, otherwise your app's name is used
-	url - a supplementary URL to show with your message
-	url_title - a title for your supplementary URL, otherwise just the URL is shown
-	priority - send as -2 to generate no notification/alert, -1 to always send as a quiet notification, 1 to display as high-priority and bypass the user's quiet hours, or 2 to also require confirmation from the user
-	timestamp - a Unix timestamp of your message's date and time to display to the user, rather than the time your message is received by our API
-	sound - the name of one of the sounds supported by device clients to override the user's default sound choice
-	 */
-
 	/**
 	 * Sends a notification event to Pushover.
 	 *
@@ -32,10 +20,10 @@ class Client extends AbstractClient {
 	 * @param  string $url       A URL to link the message to
 	 * @param  string $urlTitle  A title for the linked URL
 	 * @param  string $priority  A priority for the message
-	 * @param  string $timestamp A
-	 * @param  string $sound     [description]
-	 * @param  string $device    [description]
-	 * @return [type]            [description]
+	 * @param  string $timestamp a Unix timestamp of your message's date and time to display to the user, rather than the time your message is received by our API
+	 * @param  string $sound     the name of one of the sounds supported by device clients to override the user's default sound choice
+	 * @param  string $device    your user's device name to send the message directly to that device, rather than all of the user's devices
+	 * @return boolean           Whether or not the notification was successful
 	 */
 	public function notify($message, $title = null, $url = null, $urlTitle = null, $priority = null, $timestamp = null, $sound = null, $device = null) {
 
@@ -64,10 +52,16 @@ class Client extends AbstractClient {
 		);
 
 		$context  = stream_context_create($options);
-		$result = file_get_contents($this->endpointUrl, false, $context);
+		$result = @file_get_contents($this->endpointUrl, false, $context);
 
-		print_r($result);
-
+		if (! $result) {
+			return false;
+		}
+		$response = json_decode($result, true);
+		if ($response && ! empty($response['status'])) {
+			return true;
+		}
+		return false;
 	}
 
 }
