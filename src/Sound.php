@@ -1,6 +1,6 @@
 <?php
 
-namespace Pushover\V1;
+namespace PushoverV1;
 
 abstract class Sound {
 

@@ -1,15 +1,17 @@
 <?php
 
-namespace Pushover\V1;
+namespace PushoverV1;
 
-use \Pushover\AbstractClient;
-
-class Client extends AbstractClient {
+class Client {
 
 	const API_ENDPOINT = 'https://api.pushover.net/1/messages.json';
 
+	protected $appToken;
+	protected $endpointUrl;
+
 	public function __construct($appToken, $endpointUrl = self::API_ENDPOINT) {
-		parent::__construct($appToken, $endpointUrl);
+		$this->appToken      = $appToken;
+		$this->endpointUrl = $endpointUrl;
 	}
 
 	/**
