@@ -1,11 +1,11 @@
 {
-	"name"        : "BitMoth/Pushover",
-	"description" : "A simple library for Pushover access",
+	"name"        : "bellows/api-pushover-v1",
+	"description" : "A simple library for Pushover APIv1 access",
 	"license"     : "MIT",
 	"require"     : {},
 	"autoload"    : {
 		"psr-4": {
-			"Pushover\\": "src/"
+			"PushoverV1\\": "src/"
 		}
 	}
 }
